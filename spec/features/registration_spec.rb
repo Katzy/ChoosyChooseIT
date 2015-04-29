@@ -13,5 +13,17 @@ RSpec.feature "Registration" do
     expect(User.find_by(email: "katz@example.com")).to be_present
 
     expect(page).to have_content "Welcome! You have signed up successfully."
+
+    click_link_or_button "Logout"
+
+    expect(page).to have_content "Signed out successfully."
+
+
   end
 end
+
+
+# before (:each) do
+#         @admin = FactoryGirl.create(:administrator)
+#         sign_in @admin
+#       end

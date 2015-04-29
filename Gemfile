@@ -23,9 +23,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'capybara', '~> 2.4'
+
+gem 'omniauth'
+gem 'omniauth-facebook'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'dotenv-rails', :groups => [:development, :test]
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -43,3 +46,16 @@ group :development, :test do
   gem 'spring'
 end
 
+group :test do
+  # Useful for generating database entries for testing
+  # See: https://github.com/thoughtbot/factory_girl_rails
+  gem 'factory_girl_rails', '~> 4.0'
+
+  # Useful for generating dummy data, e.g., fake email addresses
+  # See: https://github.com/stympy/faker
+  gem 'faker'
+
+  # Useful Rails-specific RSpec matchers
+  # See: https://github.com/thoughtbot/shoulda-matchers
+  gem 'shoulda-matchers'
+end
