@@ -35,8 +35,7 @@ class UsersController < ApplicationController
       end
     end
   end
-
-  def destroy
+ destroy
     @user.destroy
     respond_to do |format|
       format.html { redirect_to root_url }

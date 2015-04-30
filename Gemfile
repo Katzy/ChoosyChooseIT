@@ -14,8 +14,13 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'rspec-rails', '~> 3.2'
+
+gem 'dragonfly'
+gem 'dragonfly-s3_data_store'
+gem 'remotipart', '~> 1.2'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-fileupload-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -34,6 +39,11 @@ gem 'dotenv-rails', :groups => [:development, :test]
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+group :production do
+  gem 'rack-cache', :require => 'rack/cache'
+end
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
