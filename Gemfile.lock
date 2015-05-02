@@ -330,7 +330,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   dotenv-rails
-  dragonfly
+  dragonfly (~> 1.0.8)
   dragonfly-s3_data_store
   factory_girl_rails (~> 4.0)
   faker

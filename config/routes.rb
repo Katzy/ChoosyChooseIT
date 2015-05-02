@@ -10,9 +10,12 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
 
-  resources :users, except: :create
+  resources :users do
+    resources :chooseits, controller: "users/chooseits"
+  end
 
   resources :chooseits
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

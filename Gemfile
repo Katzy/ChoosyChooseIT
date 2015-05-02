@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 gem 'rspec-rails', '~> 3.2'
 
-gem 'dragonfly'
+gem 'dragonfly', '~> 1.0.8'
 gem 'dragonfly-s3_data_store'
 gem 'remotipart', '~> 1.2'
 # Use jquery as the JavaScript library

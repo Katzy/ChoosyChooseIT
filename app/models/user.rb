@@ -1,14 +1,18 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  TEMP_EMAIL_PREFIX = 'change@me'
-  TEMP_EMAIL_REGEX = /\Achange@me/
+
+  has_many :chooseits
+
 
 
   devise  :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  # def self.find_or_create_by_session_data(user_id, guest_id)
+  #   self.find_by(user_id) || self.find_by(guest_id) || create(:guest_id => guest_id, :validate => false)
+  # end
+
 
   def self.from_omniauth(auth)
 
@@ -28,9 +32,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
+  def find_by_user_id(user_id)
+    self.find_by(user_id)
   end
 
-    # self.find_by_provider_and_uid(auth["provider"], auth["uid"]) || self.create_with_omniauth(auth)
+  private
+
+
+
+  def find_by_uuid(guest_id)
+    self.find_by(guest_id)
+  end
+
 end

@@ -1,21 +1,25 @@
-class ChooseitsController < ApplicationController
+module Users
+  class ChooseitsController < ApplicationController
 
-  def new
-    @chooseit = Chooseit.new
-  end
+    def new
+      @chooseit = Chooseit.new
+    end
 
-  def create
-    @chooseit = Chooseit.create(chooseit_params)
-  end
+    def create
+      @user = User.find(params[:user_id])
 
-  def delete
-  end
+      @chooseit = Chooseit.new(chooseit_params)
 
-  private
 
-  def chooseit_params
-    params.require(:chooseit).permit(:title, :short_name)
+    end
+
+    def delete
+    end
+
+    private
+
+    def chooseit_params
+      params.require(:chooseit).permit(:title, :short_name, :author_id, :genres, :created_at, :updated_at)
+    end
   end
 end
-
-
