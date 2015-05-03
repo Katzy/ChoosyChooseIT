@@ -1,8 +1,9 @@
-<div class="border-wrestler-div">
-    <%= form_for(@chooseit) do |f| %>
+<div class="border-chooseits-div">
+    <%= form_for([@user, @chooseit]) do |f| %>
+
       <% if @chooseit.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@wrestler.errors.count, "error") %> prohibited this wrestler from being saved:</h2>
+          <h2><%= pluralize(@chooseit.errors.count, "error") %> prohibited this chooseit from being saved:</h2>
 
           <ul>
           <% @chooseit.errors.full_messages.each do |message| %>
@@ -15,12 +16,12 @@
       <div class="row">
           <div class="form-group">
             <%= f.label "Genre", class: 'col-sm-2 control-label' %>
-            <div class="col-sm-4">
+            <div class="col-sm-4"><br>
                 <%= f.select :genres, options_for_select(Chooseit::GENRES) %>
-            </div>
+            </div><br><br>
 
             <%= f.label :title, "What is this ChooseIT about?",  class: 'col-sm-2 control-label' %>
-          <div class="col-sm-4">
+          <div class="col-sm-4"><br>
             <%= f.text_area :title, :placeholder => "This is YOUR ChooseIT. Ask whatever you want!", class: 'form-control'%>
           </div>
             <br><br>

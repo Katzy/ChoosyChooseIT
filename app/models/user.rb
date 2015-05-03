@@ -4,15 +4,25 @@ class User < ActiveRecord::Base
 
   has_many :chooseits
 
-
+  accepts_nested_attributes_for :chooseits, :allow_destroy => true
 
   devise  :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
-  # def self.find_or_create_by_session_data(user_id, guest_id)
-  #   self.find_by(user_id) || self.find_by(guest_id) || create(:guest_id => guest_id, :validate => false)
-  # end
+  def logged_in?
+    self.guest_id == nil
+  end
 
+  def self.find_or_create_by_session_data(user_id, token)
+    self.find_by(user_id) || self.where(:guest_id == token) || create_guest_user(token)
+  end
+
+  def create_guest_user(token)
+    u = User.create(:email => "guest_#{Time.now.to_i}#{rand(100)}@example.com", :guest_id => token)
+    u.save!(:validate => false)
+    session[:guest_id] = u.id
+    u
+  end
 
   def self.from_omniauth(auth)
 
