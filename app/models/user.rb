@@ -1,14 +1,28 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  TEMP_EMAIL_PREFIX = 'change@me'
-  TEMP_EMAIL_REGEX = /\Achange@me/
 
+  has_many :chooseits
+
+  accepts_nested_attributes_for :chooseits, :allow_destroy => true
 
   devise  :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  def logged_in?
+    self.guest_id == nil
+  end
+
+  def self.find_or_create_by_session_data(user_id, token)
+    self.find_by(user_id) || self.where(:guest_id == token) || create_guest_user(token)
+  end
+
+  def create_guest_user(token)
+    u = User.create(:email => "guest_#{Time.now.to_i}#{rand(100)}@example.com", :guest_id => token)
+    u.save!(:validate => false)
+    session[:guest_id] = u.id
+    u
+  end
 
   def self.from_omniauth(auth)
 
@@ -28,9 +42,16 @@ class User < ActiveRecord::Base
     end
   end
 
-  def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
+  def find_by_user_id(user_id)
+    self.find_by(user_id)
   end
 
-    # self.find_by_provider_and_uid(auth["provider"], auth["uid"]) || self.create_with_omniauth(auth)
+  private
+
+
+
+  def find_by_uuid(guest_id)
+    self.find_by(guest_id)
+  end
+
 end

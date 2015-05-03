@@ -1,0 +1,18 @@
+<thead>
+  <tr>Title</tr>
+  <tr>User Id</tr>
+  <tr>Link</tr>
+  <tr>Genre</tr>
+  <tr>Edit</tr>
+  <tr>Delete</tr>
+</thead>
+
+<tbody>
+  <% @chooseits.each do |chooseit| %><br>
+   <%= render partial: '/users/chooseits/table_row', locals: { chooseit: chooseit } %> <br>
+   <% end %>
+ </tbody>
+
+<div class="button"><br><br>
+    <%= link_to "Create a ChooseIT", new_user_chooseit_path %>
+</div>

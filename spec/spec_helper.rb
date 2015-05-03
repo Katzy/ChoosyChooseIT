@@ -17,6 +17,31 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
+
+  config.before(:create_chooseIT_poll_spec => true) do
+    RSpec.feature "Registration" do
+  scenario "User signs up, logs out, logs back in" do
+    visit "/"
+    click_link_or_button "Sign_up"
+    fill_in "Email", with: "katz@example.com"
+    fill_in "Password", with: "password"
+    fill_in "Password confirmation", with: "password"
+    click_link_or_button "Sign up"
+
+    expect(User.find_by(email: "katz@example.com")).to be_present
+
+    expect(page).to have_content "Welcome! You have signed up successfully."
+
+    click_link_or_button "Logout"
+
+    expect(page).to have_content "Signed out successfully."
+
+
+  end
+end
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

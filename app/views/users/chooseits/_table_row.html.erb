@@ -1,0 +1,9 @@
+<tr>
+  <td><%= chooseit.title %>
+  <td><%= chooseit.author_id %></td>
+  <td><%= chooseit.short_name %></td>
+  <td><%= chooseit.genres %></td>
+
+  <td><%= link_to 'Edit', edit_chooseit_path(chooseit) %></td>
+  <td><%= link_to 'Delete', chooseit, method: "delete", :data => {:confirm => 'Are you sure?'} %></td>
+</tr>

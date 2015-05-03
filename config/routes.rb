@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # get 'finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
+
   devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -10,9 +11,20 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
 
-  resources :users, except: :create
+  resources :users do
+    resources :chooseits
+  end
 
   resources :chooseits
+
+  # controller :chooseits do
+  #   delete '/chooseits/:id',      action: 'destroy'
+  # end
+
+  # controller :users do
+  #   delete '/users/:id',      action: 'destroy'
+  # end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
