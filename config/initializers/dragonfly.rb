@@ -15,8 +15,8 @@ Dragonfly.app.configure do
   else
     datastore :s3,
               bucket_name: 'choosychooseit',
-              access_key_id: ENV['AWSAccessKeyId'],
-              secret_access_key: ENV['AWSSecretKey'],
+              access_key_id: ENV['AWSACCESSKEYID'],
+              secret_access_key: ENV['AWSSECRETKEY'],
               url_scheme: 'https'
   end
 
