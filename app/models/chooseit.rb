@@ -5,7 +5,7 @@ class Chooseit < ActiveRecord::Base
   belongs_to :user
   has_many :chooseit_choices
   has_many :chooseit_responses
-  has_many :chooseit_response_choices, through: => :chooseit_choice
+  has_many :chooseit_response_choices, through: :chooseit_choice
 
   accepts_nested_attributes_for :chooseit_choices, :allow_destroy => true
 
