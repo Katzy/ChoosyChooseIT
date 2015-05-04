@@ -14,7 +14,7 @@ Dragonfly.app.configure do
               server_root: Rails.root.join('public')
   else
     datastore :s3,
-              bucket_name: choosychooseit,
+              bucket_name: 'choosychooseit',
               access_key_id: ENV['AWSAccessKeyId'],
               secret_access_key: ENV['AWSSecretKey'],
               url_scheme: 'https'
