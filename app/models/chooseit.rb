@@ -13,9 +13,9 @@ class Chooseit < ActiveRecord::Base
 
   GENRES = ["People", "Places", "Things", "Furry Creatures", "Miscellaneous"]
 
-  def chooseit_choices
-    [@chooseit_choice_1 = ChooseitChoice.new, @chooseit_choice_2 = ChooseitChoice.new]
-  end
+  # def chooseit_choices
+  #   [@chooseit_choice_1 = ChooseitChoice.new, @chooseit_choice_2 = ChooseitChoice.new]
+  # end
   # def to_param
   #   self.short_name
   # end

@@ -6,8 +6,10 @@ module Users
     before_action :current_user
 
     def index
-      @author = current_user
-      @chooseits = @author.chooseits.all
+
+    @author = User.find(params[:user_id])
+    @chooseits = Chooseit.where("'author_id' = #{@author.id}")
+
     end
 
     def new
@@ -15,26 +17,26 @@ module Users
       @chooseit = @user.chooseits.new
     end
 
-    def create
-      @author = User.find_by(params[:user_id])
-      p "author id #{@author.id}"
-      @chooseit = @author.chooseits.new(chooseit_params)
-      @chooseit.author_id = @author.id
-      respond_to do |format|
-        if @chooseit.save
-          # UserMailer.wrestler_added(user).deliver
-          format.html { redirect_to user_chooseits_path(@author), notice: 'ChooseIT was successfully created.' }
-          format.json { render action: 'show', status: :created, location: @author }
-          # added:
-          format.js   { render action: 'show', status: :created, location: @author }
-        else
-          format.html { render action: 'new' }
-          format.json { render json: @chooseit.errors, status: :unprocessable_entity }
-          # added:
-          format.js   { render json: @chooseit.errors, status: :unprocessable_entity }
-        end
-      end
-    end
+    # def create
+    #   @author = User.find_by(params[:user_id])
+    #   p "author id #{@author.id}"
+    #   @chooseit = @author.chooseits.new(chooseit_params)
+    #   @chooseit.author_id = @author.id
+    #   respond_to do |format|
+    #     if @chooseit.save
+    #       # UserMailer.wrestler_added(user).deliver
+    #       format.html { redirect_to user_chooseits_path(@author), notice: 'ChooseIT was successfully created.' }
+    #       format.json { render action: 'show', status: :created, location: @author }
+    #       # added:
+    #       format.js   { render action: 'show', status: :created, location: @author }
+    #     else
+    #       format.html { render action: 'new' }
+    #       format.json { render json: @chooseit.errors, status: :unprocessable_entity }
+    #       # added:
+    #       format.js   { render json: @chooseit.errors, status: :unprocessable_entity }
+    #     end
+    #   end
+    # end
 
     def show
       # authorize! :read, @user

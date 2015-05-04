@@ -1,17 +1,23 @@
 <thead>
-  <tr>Title</tr>
   <tr>User Id</tr>
-  <tr>Link</tr>
+  <tr>Title</tr>
   <tr>Genre</tr>
+  <tr>Option 1</tr>
+  <tr></tr>
+  <tr>Option 2</tr>
+  <tr></tr>
   <tr>Edit</tr>
   <tr>Delete</tr>
+  <tr>Show</tr>
 </thead>
 
 <tbody>
   <% @chooseits.each do |chooseit| %><br>
-   <%= render partial: '/users/chooseits/table_row', locals: { chooseit: chooseit } %> <br>
-   <% end %>
- </tbody>
+    <% chooseit_choice_1 = chooseit.chooseit_choices[0] %>
+    <% chooseit_choice_2 = chooseit.chooseit_choices[1] %>
+    <%= render partial: '/users/chooseits/table_row', locals: { chooseits: @chooseits, chooseit: chooseit, chooseit_choice_1: chooseit_choice_1, chooseit_choice_2: chooseit_choice_2 } %> <br>
+  <% end %>
+</tbody>
 
 <div class="button"><br><br>
     <%= link_to "Create a ChooseIT", new_user_chooseit_path %>

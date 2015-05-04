@@ -1,6 +1,6 @@
 <thead><br><br>
-  <tr>Title</tr>
   <tr>User Id</tr>
+  <tr>Title</tr>
   <tr>Link</tr>
   <tr>Genre</tr>
   <tr>Option 1</tr>
@@ -15,5 +15,9 @@
  </tbody>
 
 <div class="button"><br><br>
-    <%= link_to "Create a ChooseIT", new_user_chooseit_path(current_user) %>
+    <%= link_to "Create a ChooseIT", new_chooseit_path %>
 </div>
+
+<div class="button"><br><br>
+  <%= link_to "Show my ChooseITs", user_chooseits_path(@author) %>
+ </div>
