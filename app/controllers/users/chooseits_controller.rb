@@ -54,5 +54,9 @@ module Users
     def chooseit_params
       params.require(:chooseit).permit(:title, :short_name, :author_id, :genres, :created_at, :updated_at, :user_id)
     end
+
+    def chooseit_choice_params
+      params.require(:chooseit_choice).permit(:description, :chooseit_id, :image)
+    end
   end
 end

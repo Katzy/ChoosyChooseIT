@@ -1,14 +1,9 @@
-<% if current_user.logged_in? %>
+
  <div class="button"><br>
-  <%= link_to "Create a ChooseIT", new_user_chooseit_path(current_user) %>
+  <%= link_to "Create a ChooseIT", new_chooseit_path %>
  </div>
-<div class="button"><br>
+<!-- <div class="button"><br>
   <%= link_to "Show my ChooseITs", user_chooseits_path(current_user) %>
  </div>
+ -->
 
-
-<% else %>
-  <div class="button"><br><br>
-    <%= link_to "Create a ChooseIT", new_chooseit_path %>
-  </div>
-<% end %>

@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
   end
 
   def self.find_or_create_by_session_data(user_id, token)
-    self.find_by(user_id) || self.where(:guest_id == token) || create_guest_user(token)
+    self.find_by(user_id) || self.where(:guest_id == "token") || create_guest_user(token)
   end
 
   def create_guest_user(token)
-    u = User.create(:email => "guest_#{Time.now.to_i}#{rand(100)}@example.com", :guest_id => token)
+    u = User.create(:guest_id => token)
     u.save!(:validate => false)
     session[:guest_id] = u.id
     u

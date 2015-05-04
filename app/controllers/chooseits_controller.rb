@@ -8,29 +8,41 @@ class ChooseitsController < ApplicationController
   end
 
   def new
-    if params[:user_id]
-      @user = User.find(params[:user_id])
+    if session[:guest_id] != current_user.guest_id
+      @author = User.find(params[current_user.id])
+      @chooseit = @author.chooseits.new
     else
-      @user = User.find(current_user.id)
+      @chooseit = Chooseit.new
     end
-    @chooseit = @user.chooseits.new
+    # @chooseit_choices = [@chooseit_choice_1 = ChooseitChoice.new, @chooseit_choice_2 = ChooseitChoice.new]
+
     # redirect_to new_user_chooseit_path(@user)
   end
 
   def create
-    if params[:user_id]
-      @author = User.find(params[:user_id])
+    if session[:guest_id] != current_user.guest_id
+      @author = User.find(params[current_user.id])
+      @chooseit = @author.chooseits.new(chooseit_params)
+      @chooseit.author_id = @author.id
     else
-      @author = User.find(current_user.id)
+      @chooseit = Chooseit.new(chooseit_params)
+      @chooseit.author_id = current_user.id
     end
+    @chooseit_choice_1 = @chooseit.chooseit_choices[0]
+    @chooseit_choice_2 = @chooseit.chooseit_choices[1]
 
-    @chooseit = @author.chooseits.new(chooseit_params)
-    @chooseit.author_id = @author.id
+
+      # @chooseit_choice_1 = .new(chooseit_choice_params)
+    # @chooseit_choice_1[:chooseit_id] = @chooseit.id
+    # @chooseit_choice_2 = ChooseitChoice.new(chooseit_choice_params)
+    # @chooseit_choice_2[:chooseit_id] = @chooseit.id
 
     respond_to do |format|
       if @chooseit.save
+          @chooseit_choice_1.save
+          @chooseit_choice_2.save
         # UserMailer.wrestler_added(user).deliver
-        format.html { redirect_to user_chooseits_path(@author), notice: 'ChooseIT was successfully created.' }
+        format.html { redirect_to chooseit_path(@chooseit), notice: 'ChooseIT was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
         # added:
         format.js   { render action: 'show', status: :created, location: @user }
@@ -45,6 +57,10 @@ class ChooseitsController < ApplicationController
 
   def show
     @chooseit = Chooseit.find(params[:id])
+
+    @chooseit_choice_1 = @chooseit.chooseit_choices.first
+    @chooseit_choice_2 = @chooseit.chooseit_choices.last
+
   end
 
   # GET /users/:id/edit
@@ -69,6 +85,7 @@ class ChooseitsController < ApplicationController
   end
 
   def chooseit_params
-    params.require(:chooseit).permit(:title, :short_name, :author_id, :genres, :created_at, :updated_at, :user_id)
+    params.require(:chooseit).permit(:title, :short_name, :author_id, :genres, :created_at, :updated_at, :user_id, chooseit_choices_attributes: [:description, :chooseit_id, :image])
   end
+
 end

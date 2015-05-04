@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502182654) do
+ActiveRecord::Schema.define(version: 20150503224018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20150502182654) do
   create_table "chooseit_choices", force: :cascade do |t|
     t.string  "description"
     t.integer "chooseit_id"
+    t.string  "image_uid"
+    t.string  "image_name"
   end
 
   add_index "chooseit_choices", ["chooseit_id"], name: "index_chooseit_choices_on_chooseit_id", using: :btree

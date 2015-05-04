@@ -1,0 +1,19 @@
+<thead><br><br>
+  <tr>Title</tr>
+  <tr>User Id</tr>
+  <tr>Link</tr>
+  <tr>Genre</tr>
+  <tr>Option 1</tr>
+  <tr>Opion 2</tr>
+  <tr>Edit</tr>
+  <tr>Delete</tr>
+</thead>
+
+<tbody>
+<br>
+   <%= render partial: '/users/chooseits/table_row', locals: { chooseit: @chooseit, chooseit_choice_1: @chooseit_choice_1, chooseit_choice_2: @chooseit_choice_2 } %> <br>
+ </tbody>
+
+<div class="button"><br><br>
+    <%= link_to "Create a ChooseIT", new_user_chooseit_path(current_user) %>
+</div>

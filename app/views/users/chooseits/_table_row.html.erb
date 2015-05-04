@@ -3,7 +3,8 @@
   <td><%= chooseit.author_id %></td>
   <td><%= chooseit.short_name %></td>
   <td><%= chooseit.genres %></td>
-
+  <td><%= image_tag chooseit_choice_1.image.thumb('300x300#').url if chooseit_choice_2.image_stored? %></td>
+  <td><%= image_tag chooseit_choice_2.image.thumb('300x300#').url if chooseit_choice_2.image_stored? %></td>
   <td><%= link_to 'Edit', edit_chooseit_path(chooseit) %></td>
   <td><%= link_to 'Delete', chooseit, method: "delete", :data => {:confirm => 'Are you sure?'} %></td>
 </tr>
