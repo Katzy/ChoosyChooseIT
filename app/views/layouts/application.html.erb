@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<%= render partial: "shared/header" %>
+<%= render partial: "shared/header", locals: { user: @user } %>
 
 <% if flash[:notice] %>
   <p class="notice"><%= flash[:notice] %></p>

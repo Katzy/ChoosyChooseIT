@@ -2,13 +2,15 @@ class ChooseitsController < ApplicationController
 
   include ApplicationHelper
 
-  before_action :current_user
+  skip_before_filter :current_or_guest_user, :only => [:index]
 
   def index
-
+    p params[:user_id]
     @author = User.find(params[:user_id])
     @chooseits = Chooseit.where("author_id = #{@author.id}")
-    p "hello"
+    p @author.id
+    p @chooseits.length
+
 
   end
 
@@ -24,21 +26,14 @@ class ChooseitsController < ApplicationController
 
 
   def create
-    if session[:guest_id] != current_user.guest_id
-      @author = User.find(params[current_user.id])
-      @chooseit = @author.chooseits.new(chooseit_params)
-      @chooseit.author_id = @author.id
-    else
-      @chooseit = Chooseit.new(chooseit_params)
-      @chooseit.author_id = current_user.id
-    end
 
-     @chooseit_choice_1 =  @chooseit.chooseit_choices.new(chooseit_params[:chooseit_choices_attributes][0])
-     @chooseit_choice_2 =  @chooseit.chooseit_choices.new(chooseit_params[:chooseit_choices_attributes][1])
-      # @chooseit_choice_1 = .new(chooseit_choice_params)
-    # @chooseit_choice_1[:chooseit_id] = @chooseit.id
-    # @chooseit_choice_2 = ChooseitChoice.new(chooseit_choice_params)
-    # @chooseit_choice_2[:chooseit_id] = @chooseit.id
+
+      @chooseit = Chooseit.new(chooseit_params)
+      if current_user
+        @chooseit.author_id = current_user.id
+      else
+        @chooseit.author_id =  guest_user.id
+      end
 
     respond_to do |format|
       if @chooseit.save
@@ -68,11 +63,6 @@ class ChooseitsController < ApplicationController
   # GET /users/:id/edit
   def edit
     @chooseit = Chooseit.find(params[:id])
-    @chooseit_choices = @chooseit.chooseit_choices
-    @chooseit_choice_1 = @chooseit_choices[0]
-    @chooseit_choice_2 = @chooseit_choices[2]
-    @author = User.find(@chooseit.author_id)
-
     # authorize! :update, @user
   end
 

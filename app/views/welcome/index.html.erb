@@ -2,8 +2,11 @@
  <div class="button"><br>
   <%= link_to "Create a ChooseIT", new_chooseit_path %>
  </div>
+
+<% if current_user != nil %>
 <div class="button"><br>
-  <%= link_to "Show my ChooseITs", user_chooseits_path(current_user) %>
+  <%= link_to "Show my ChooseITs", user_chooseits_path(@user) %>
  </div>
+ <% end %>
 
 

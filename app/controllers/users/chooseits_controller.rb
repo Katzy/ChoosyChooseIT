@@ -3,11 +3,9 @@ module Users
 
     include ApplicationHelper
 
-    before_action :current_user
-
     def index
-
-    @author = User.find(params[:user_id])
+    p current_user.id
+    @author = current_user
     @chooseits = Chooseit.where("'author_id' = #{@author.id}")
 
     end
