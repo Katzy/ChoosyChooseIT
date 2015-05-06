@@ -28,6 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'capybara', '~> 2.4'
+gem 'less-rails-semantic_ui'
+gem 'autoprefixer-rails'
+gem 'therubyracer'
 
 gem 'omniauth'
 gem 'omniauth-facebook'

@@ -33,7 +33,7 @@
  </tbody><br><br>
  <% if current_user.id == @chooseit.user_id %>
     <div class="chooseit-link">
-        Here's the link to your ChooseIT -- <%= link_to "https://choosychooseit.com/chooseits/#{@chooseit.title}", chooseit_path(@chooseit) %>
+        Here's the link to your ChooseIT -- <%= link_to "https://choosychooseit.com/chooseits/#{@chooseit.slug}", chooseit_path(@chooseit) %>
     </div>
 
     <div class="button"><br><br>
@@ -42,7 +42,7 @@
 <% end %>
 
 <div class="button"><br><br>
-  <% if current_user.voted_for?(@chooseit) %>
+  <% if current_user.voted_for?(@chooseit) && current_user.id != @chooseit.user_id %>
     <h4>You've just given someone the gift of your solicited opinion!</h4>
     <h4>How about soliciting some of your own? Go ahead...</h4><br>
   <% end %>
