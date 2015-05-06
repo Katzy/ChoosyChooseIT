@@ -1,7 +1,8 @@
 class ChooseitResponse < ActiveRecord::Base
 
-  belongs_to :chooseit
+
   belongs_to :user
+  belongs_to :chooseit_choice
 
 
 end

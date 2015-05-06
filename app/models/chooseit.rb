@@ -1,13 +1,14 @@
 class Chooseit < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders]
 
   before_create :set_chooseit_link
 
   belongs_to :user
-  has_many :chooseit_choices
+  has_many :chooseit_choices, dependent: :destroy
   has_many :chooseit_responses
-  has_many :chooseit_response_choices, through: :chooseit_choice
 
-  accepts_nested_attributes_for :chooseit_choices, :allow_destroy => true
+  accepts_nested_attributes_for :chooseit_choices, :reject_if => :all_blank, :allow_destroy => true
 
   validates :title, :presence => true
 

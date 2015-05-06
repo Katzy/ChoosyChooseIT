@@ -11,13 +11,41 @@
 
 <tbody>
 <br>
-   <%= render partial: '/users/chooseits/table_row', locals: { chooseit: @chooseit, chooseit_choice_1: @chooseit_choice_1, chooseit_choice_2: @chooseit_choice_2 } %> <br>
- </tbody>
+
+   <tr>
+  <td><%= @chooseit.user_id %></td>
+  <td><%= @chooseit.title %>
+  <td><%= @chooseit.genres %></td>
+
+  <td><%= @chooseit_choice_1.description %></td>
+  <td><%= image_tag @chooseit_choice_1.image.thumb('150x150#').url if @chooseit_choice_1.image_stored? %></td>
+  <td><%= @chooseit_choice_2.description %></td>
+  <td><%= image_tag @chooseit_choice_2.image.thumb('150x150#').url if @chooseit_choice_2.image_stored? %></td>
+  <td><%= link_to 'Edit', edit_chooseit_path(@chooseit) %></td>
+  <td><%= link_to 'Delete', @chooseit, method: "delete", :data => {:confirm => 'Are you sure?'} %></td>
+
+</tr>
+<br><br>
+<% if current_user.id != @chooseit.user_id %>
+<%= render 'chooseit_responses/chooseit_response_form' %>
+<% end %>
+
+ </tbody><br><br>
+ <% if current_user.id == @chooseit.user_id %>
+    <div class="chooseit-link">
+        Here's the link to your ChooseIT -- <%= link_to "https://choosychooseit.com/chooseits/#{@chooseit.title}", chooseit_path(@chooseit) %>
+    </div>
+
+    <div class="button"><br><br>
+      <%= link_to "Show my ChooseITs", user_chooseits_path(@author) %>
+    </div>
+<% end %>
 
 <div class="button"><br><br>
-    <%= link_to "Create a ChooseIT", new_chooseit_path %>
+  <% if current_user.voted_for?(@chooseit) %>
+    <h4>You've just given someone the gift of your solicited opinion!</h4>
+    <h4>How about soliciting some of your own? Go ahead...</h4><br>
+  <% end %>
+  <%= link_to "Create a ChooseIT", new_chooseit_path %>
 </div>
 
-<div class="button"><br><br>
-  <%= link_to "Show my ChooseITs", user_chooseits_path(@author) %>
- </div>

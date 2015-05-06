@@ -3,9 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   has_many :chooseits
-  has_many :chooseit_choices
-  has_many :chooseit_responses
-  has_many :chooseit_response_choices, through: :chooseit_responses
+  has_many :chooseit_responses, dependent: :destroy
+  has_many :chooseit_choices, through: :chooseit_responses
 
   accepts_nested_attributes_for :chooseits, :allow_destroy => true
 
@@ -16,7 +15,9 @@ class User < ActiveRecord::Base
   #   self.guest_id == nil
   # end
 
-
+  def voted_for?(chooseit)
+    chooseit_choices.any? { |choice| choice.chooseit == chooseit }
+  end
 
   def self.from_omniauth(auth)
 

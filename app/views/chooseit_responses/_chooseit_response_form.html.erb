@@ -1,0 +1,11 @@
+<%= form_tag chooseit_responses_path, method: :post, id: 'chooseit_response_form' do %>
+  <%= hidden_field_tag 'chooseit[id]', @chooseit.id %>
+
+  <%= render partial: 'chooseits/chooseit_choice', collection: @chooseit.chooseit_choices, as: :option %>
+
+  <% if current_user.voted_for?(@poll) %>
+    <p>You have already submitted your solicited opinion!</p>
+  <% else %>
+    <%= submit_tag 'ChooseIT', class: 'button' %>
+  <% end %>
+<% end %>

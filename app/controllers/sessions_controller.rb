@@ -1,3 +1,7 @@
 class SessionsController < Devise::SessionsController
-  skip_filter :verify_signed_out_user, only: :destroy
+  def destroy
+    cookiesdelete(:user_id)
+    flash[:success]= "Ciao!"
+    redirect_to root_url
+  end
 end

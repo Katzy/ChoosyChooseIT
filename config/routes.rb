@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :chooseits
 
+  resources :chooseit_responses, only: [:create]
+
   # controller :chooseits do
   #   delete '/chooseits/:id',      action: 'destroy'
   # end

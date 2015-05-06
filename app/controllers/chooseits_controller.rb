@@ -7,9 +7,11 @@ class ChooseitsController < ApplicationController
   def index
     p params[:user_id]
     @author = User.find(params[:user_id])
-    @chooseits = Chooseit.where("author_id = #{@author.id}")
-    p @author.id
-    p @chooseits.length
+    @chooseits_temp = Chooseit.where("user_id = #{@author.id}")
+    @chooseits = []
+    @chooseits_temp.each do |chooseit|
+      @chooseits << chooseit = Chooseit.friendly.find(chooseit.id)
+    end
 
 
   end
@@ -30,9 +32,9 @@ class ChooseitsController < ApplicationController
 
       @chooseit = Chooseit.new(chooseit_params)
       if current_user
-        @chooseit.author_id = current_user.id
+        @chooseit.user_id = current_user.id
       else
-        @chooseit.author_id =  guest_user.id
+        @chooseit.user_id =  guest_user.id
       end
 
     respond_to do |format|
@@ -53,8 +55,8 @@ class ChooseitsController < ApplicationController
   end
 
   def show
-    @chooseit = Chooseit.find(params[:id])
-    @author = User.find(@chooseit.author_id)
+    @chooseit = Chooseit.includes(:chooseit_choices).find(params[:id])
+    @author = User.find(@chooseit.user_id)
     @chooseit_choice_1 = @chooseit.chooseit_choices[0]
     @chooseit_choice_2 = @chooseit.chooseit_choices[1]
 
@@ -68,7 +70,7 @@ class ChooseitsController < ApplicationController
 
   def update
     @chooseit = Chooseit.find(params[:id])
-    @author = User.find(@chooseit.author_id)
+    @author = User.find(@chooseit.user_id)
     if @chooseit.update(chooseit_params)
       redirect_to user_chooseits_path(@author)
     else
@@ -81,7 +83,7 @@ class ChooseitsController < ApplicationController
 
     @chooseit = Chooseit.find(params[:id])
     @chooseit_choices = @chooseit.chooseit_choices
-    user = @chooseit[:author_id]
+    user = @chooseit[:user_id]
     @chooseit_choices.each do |choice|
       choice.destroy
     end
