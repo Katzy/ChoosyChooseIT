@@ -15,7 +15,12 @@ class ChooseitResponsesController < ApplicationController
     else
       # render js: 'alert(\'Your vote cannot be saved.\');'
     end
-    # redirect_to "/"
+    @chooseit = Chooseit.find(params[:chooseit][:id])
+    @user = User.find(@chooseit.user_id)
+    @chooseits=@user.chooseits# redirect_to "/"
+  end
+
+  def show
   end
 
   private

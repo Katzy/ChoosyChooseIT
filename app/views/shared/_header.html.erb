@@ -1,13 +1,62 @@
-<% if user_signed_in? == false %>
-  <%= link_to "Log in", new_user_session_path %>
-  <%= link_to image_tag('fb_logo.png'), user_omniauth_authorize_path(:facebook) %>
-  <%= link_to "Sign_up", new_user_registration_path %>
-<% end %>
+<div class="ui large vertically aligned menu">
+  <a href=<%= root_path %>><div class="item">
+    <i class="big home icon link icon"></i> Home</div>
+  </a>
+  <a class="item">
+    <i class="mail icon"></i> Messages
+  </a>
+  <% if user_signed_in? || (guest_user.chooseits.length >= 1 && guest_user.email == nil) %>
+  <div class="ui dropdown item">
+      My ChooseITS <i class="dropdown icon"></i>
+      <div class="menu">
 
-<% if current_user %>
-  Welcome <%= current_user.email %><br><br>
-   <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
-  <% else %>
-  Welcome Guest <br><br>
-  <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
-<% end %>
+          <% @chooseits.each do |chooseit| %>
+            <li class="item"><%= link_to "#{chooseit.title}", chooseit_path(chooseit) %></li>>
+          <% end %>
+
+      </div>
+    </div>
+     <% end %>
+
+  <div class="right menu">
+    <!-- <div class="item">
+      <div class="ui icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div> -->
+
+    <div class="item">
+      <% if current_user %>
+         Welcome <%= current_user.email %>
+         <% if current_user.image %>
+          <div class="item">
+            <img class="ui avatar mini image" src=<%= current_user.image %>>
+          </div>
+        <% end %>
+      <% else %>
+         Welcome Guest
+      <% end %>
+    </div>
+
+      <% if !user_signed_in? %>
+        <div class="item">
+          <%= link_to "Log In", new_user_session_path %>
+        </div>
+        <div class="item">
+          <a href=<%= user_omniauth_authorize_path(:facebook) %>><i class="big blue facebook square icon link icon"></i></a>
+
+      <% else %>
+
+        <div class="ui basic blue button"> <%= link_to "Logout", destroy_user_session_path, :method => :delete %></div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

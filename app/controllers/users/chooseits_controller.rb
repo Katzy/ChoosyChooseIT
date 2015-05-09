@@ -45,6 +45,20 @@ module Users
       # authorize! :update, @user
     end
 
+     def destroy
+
+
+    @chooseit = Chooseit.find(params[:id])
+    @chooseit_choices = @chooseit.chooseit_choices
+    user = @chooseit[:user_id]
+    @chooseit_choices.each do |choice|
+      choice.destroy
+    end
+    @chooseit.destroy
+    # UserMailer.wrestler_deleted(user).deliver
+    redirect_to user_chooseits_path(user)
+  end
+
     private
 
     def user_params

@@ -1,15 +1,13 @@
+
 <tr>
-  <td><%= chooseit.user_id %></td>
+  <td><%= chooseit.created_at %></td>
   <td><%= chooseit.title %>
   <td><%= chooseit.genres %></td>
-  <td><%= chooseit_choice_1.description %></td>
+  <td><%= image_tag chooseit_choice_1.image.thumb('150x150#').url if chooseit_choice_1.image_stored? %><br><%= chooseit_choice_1.description %></td>
 
-  <td><%= chooseit_choice_1.description %></td>
-  <td><%= image_tag chooseit_choice_1.image.thumb('150x150#').url if chooseit_choice_1.image_stored? %></td>
-  <td><%= chooseit_choice_2.description %></td>
-  <td><%= image_tag chooseit_choice_2.image.thumb('150x150#').url if chooseit_choice_2.image_stored? %></td>
+    <td><%= image_tag chooseit_choice_2.image.thumb('150x150#').url if chooseit_choice_2.image_stored? %><br><%= chooseit_choice_2.description %></td>
+  <td></td>
   <td><%= link_to 'Edit', edit_chooseit_path(chooseit) %></td>
   <td><%= link_to 'Delete', chooseit, method: "delete", :data => {:confirm => 'Are you sure?'} %></td>
-  <td><%= link_to 'Show', chooseit_path(chooseit) %></td>
 </tr>
 

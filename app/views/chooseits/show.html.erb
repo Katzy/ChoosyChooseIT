@@ -1,51 +1,77 @@
-<thead><br><br>
-  <tr>User Id</tr>
-  <tr>Title</tr>
-  <tr>Link</tr>
-  <tr>Genre</tr>
-  <tr>Option 1</tr>
-  <tr>Opion 2</tr>
-  <tr>Edit</tr>
-  <tr>Delete</tr>
-</thead>
+ <% unless @user.voted_for?(@chooseit) %>
+  <div class="ui centered aligned grid">
+    <div class="center aligned sixteen wide column">
+      <div class="row"></div>
+      <div class="row"></div>
+      <h1><%= @chooseit.title.upcase %></h1>
 
-<tbody>
-<br>
+      <h5><%= link_to "https://choosychooseit.com/chooseits/#{@chooseit.slug}", chooseit_path(@chooseit) %></h5>
 
-   <tr>
-  <td><%= @chooseit.user_id %></td>
-  <td><%= @chooseit.title %>
-  <td><%= @chooseit.genres %></td>
-
-  <td><%= @chooseit_choice_1.description %></td>
-  <td><%= image_tag @chooseit_choice_1.image.thumb('150x150#').url if @chooseit_choice_1.image_stored? %></td>
-  <td><%= @chooseit_choice_2.description %></td>
-  <td><%= image_tag @chooseit_choice_2.image.thumb('150x150#').url if @chooseit_choice_2.image_stored? %></td>
-  <td><%= link_to 'Edit', edit_chooseit_path(@chooseit) %></td>
-  <td><%= link_to 'Delete', @chooseit, method: "delete", :data => {:confirm => 'Are you sure?'} %></td>
-
-</tr>
-<br><br>
-<% if current_user.id != @chooseit.user_id %>
-<%= render 'chooseit_responses/chooseit_response_form' %>
-<% end %>
-
- </tbody><br><br>
- <% if current_user.id == @chooseit.user_id %>
-    <div class="chooseit-link">
-        Here's the link to your ChooseIT -- <%= link_to "https://choosychooseit.com/chooseits/#{@chooseit.slug}", chooseit_path(@chooseit) %>
+    </div>
+    <div class="floated right aligned six wide column">
+      <h2>Option 1</h2>
+    </div>
+    <div class="floated center aligned four wide column">
+      <h4><%= @chooseit.genres %></h4>
     </div>
 
-    <div class="button"><br><br>
-      <%= link_to "Show my ChooseITs", user_chooseits_path(@author) %>
+    <div class="floated left aligned six wide column">
+       <h2>Option 2</h2>
     </div>
-<% end %>
+  </div>
 
-<div class="button"><br><br>
-  <% if current_user.voted_for?(@chooseit) && current_user.id != @chooseit.user_id %>
-    <h4>You've just given someone the gift of your solicited opinion!</h4>
-    <h4>How about soliciting some of your own? Go ahead...</h4><br>
-  <% end %>
-  <%= link_to "Create a ChooseIT", new_chooseit_path %>
+    <% if @chooseit_choice_1.image != nil || @chooseit_choice_2.image != nil %>
+  <div class="ui three column stackable grid">
+      <div class="left floated right aligned six wide column">
+          <%= image_tag @chooseit_choice_1.image.thumb('150x150#').url if @chooseit_choice_1.image_stored? %>
+      </div>
+
+      <div class="right floated left aligned six wide column">
+         <%= image_tag @chooseit_choice_2.image.thumb('150x150#').url if @chooseit_choice_2.image_stored? %>
+      </div>
+
+  </div>
+ <% end %>
+
+  <div class="ui two column stackable grid">
+
+    <div class="left floated right aligned six wide column">
+      <p><%= @chooseit_choice_1.description %></p>
+    </div>
+    <% if @user.id == @chooseit.user_id %>
+
+        <div class="floated center aligned four wide column">
+
+         <h4><%= link_to 'Edit', edit_chooseit_path(@chooseit) %> / <%= link_to 'Delete', @chooseit, method: "delete", :data => {:confirm => 'Are you sure?'} %></h4>
+
+      </div>
+    <% end %>
+
+    <div class="right floated left aligned six wide column">
+       <p><%= @chooseit_choice_2.description %></p>
+    </div>
+  </div>
 </div>
 
+
+
+    <% if @user.id != @chooseit.user_id %>
+
+      <%= render 'chooseit_responses/chooseit_response_form' %>
+    <% end %>
+
+<% end %>
+
+<div class="ui two column center aligned grid">
+<div class="column">
+
+
+  <% if @user.voted_for?(@chooseit) && @user.id != @chooseit.user_id %>
+    <h2>You've just given someone the gift of your solicited opinion!</h2>
+    <h2>How about soliciting some of your own? Go ahead...</h2><br>
+  <% end %>
+  <a href=<%= new_chooseit_path %>><button class="ui huge giant blue button">Create a ChooseIT</button></a>
+<br><br><br><br>
+</div>
+
+</div>

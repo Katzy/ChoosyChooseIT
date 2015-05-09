@@ -1,9 +1,19 @@
 
 <div class="form-group">
+
+<div class="ui center aligned sixteen column row">
   <%= content_tag(:label) do %>
+<div class="floated center aligned three wide column">
     <% unless current_user.voted_for?(@chooseit) %>
+
       <%= radio_button_tag 'chooseit_choice[id]', option.id %>
-    <% end %>
     <%= option.description %>
+    <% end %>
+  </div>
+  <div class="floated center aligned three wide column">
+
+
+</div>
   <% end %>
+</div>
 </div>

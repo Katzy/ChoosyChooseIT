@@ -1,12 +1,70 @@
+<div class="ui  vertical middle aligned relaxed fitted segment">
 
- <div class="button"><br>
-  <%= link_to "Create a ChooseIT", new_chooseit_path %>
- </div>
+</div>
 
-<% if current_user != nil %>
-<div class="button"><br>
-  <%= link_to "Show my ChooseITs", user_chooseits_path(@user) %>
- </div>
- <% end %>
+<div class="ui segment" id="background">
+  <div class="ui centered padded grid">
+
+
+    <div class="row"></div>
+        <div class="row"></div>
+            <div class="row"></div>
+      <div class="row">
+
+        <div class="eight wide column">
+          <div class="ui center aligned header"><br>
+            <% if @user == guest_user %>
+              <% if @user.chooseits.length >= 5 %>
+                <a href=<%= new_user_registration_path %>><button class="ui massive blue button">Create a ChooseIT</button></a>
+              <% else %>
+                <a href=<%= new_chooseit_path %>><button class="ui massive blue button">Create a ChooseIT</button></a>
+              <% end %>
+            <% else %>
+              <a href=<%= new_chooseit_path %>><button class="ui massive blue button">Create a ChooseIT</button></a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <% if current_user != nil %>
+          <a href=<%= user_chooseits_path(current_user) %>><button class="ui button">Show My ChooseITs</button></a>
+        <% end %>
+      </div> -->
+
+  </div>
+
+
+</div>
+<div class="ui padded page grid">
+    <div class="column">
+      <div class="ui two column stackable equal height relaxed grid">
+
+        <div class="column">
+          <div class="ui basic teal horizontal segment">
+            <div class="ui center aligned blue icon header">
+              <i class="question icon"></i>
+                <h2>What the %#!* is a ChooseIT?</h2>
+            </div>
+              <div class="ui blue sub header">
+              <h3>It's for anyone who needs help making a decision!  Ask your friends to help you make a choice.</h3></div>
+          </div>
+        </div>
+      <div class="column">
+        <div class="ui basic blue horizontal segment">
+          <div class="ui center aligned teal icon header">
+            <i class="child icon"></i>
+            How does this ChooseIT thing work?
+          </div>
+            <h4>Click the "Create a ChooseIT" button.  It can be about anything you want.  Send the link to your friends and they ChooseIT. That simple.  </h4>
+          </div>
+        </div>
+        <div class="row"></div>
+            <div class="row"></div>
+      </div>
+
+    </div>
+
+  </div>
+
 
 

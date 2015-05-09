@@ -30,6 +30,9 @@ module ApplicationHelper
   private
 
   def logging_in
+    current_user.email = guest_user.email
+    current_user.guest_id = nil
+    current_user.save
   end
 
   def create_guest_user

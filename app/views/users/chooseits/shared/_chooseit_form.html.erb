@@ -1,4 +1,5 @@
-<div class="border-chooseits-div">
+
+
     <%= form_for [@user, @chooseit] do |f| %>
 
       <% if @chooseit.errors.any? %>
@@ -12,33 +13,40 @@
           </ul>
         </div>
       <% end %>
+      <div class="ui right aligned grid">
+      <div class="left floated right aligned eight wide column">
 
-      <div class="row">
-        <div class="form-group">
-          <%= f.label "Genre", class: 'col-sm-2 control-label' %>
-          <div class="col-sm-4"><br>
+          <h2><%= f.label "Genre" %></h2><br>
+
               <%= f.select :genres, options_for_select(Chooseit::GENRES) %>
-          </div><br><br>
+          </div>
+          <div class="right floated left aligned eight wide column">
+          <h2><%= f.label :title, "ChooseIT Title",  class: 'control-label' %></h2><br>
 
-          <%= f.label :title, "What is this ChooseIT about?",  class: 'col-sm-2 control-label' %>
-          <div class="col-sm-4"><br>
             <%= f.text_area :title, :placeholder => "This is YOUR ChooseIT. Ask whatever you want!", class: 'form-control'%>
-          </div><br><br>
+          </div><br>
         </div>
-      </div>
+
+      <div class="ui right aligned grid">
 
       <%= f.fields_for  :chooseit_choices do |choice_fields| %>
-          <%= choice_fields.label "Description" %>
+      <div class="center aligned two column row">
+        <div class="left floating right aligned six wide column">
+
           <%= choice_fields.text_area :description, :placeholder => "Option" %>
+          </div>
+          <div class="right floating left aligned six wide column">
           <%= choice_fields.file_field :image %>
-
+          </div>
+      </div>
       <% end %>
+      </div>
 
-
-      <div class="form-actions">
-        <%= f.submit 'Submit', class: 'btn btn-default' %>
-      </div><br>
+      <div class="ui center aligned two column grid">
+        <div class="column">
+        <%= f.submit 'Submit' %>
+      </div>
+      </div>
     <% end %>
-  </div>
-</div>
-
+ <div class="ui segment" id="background">
+ </div>

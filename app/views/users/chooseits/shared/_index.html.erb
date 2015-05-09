@@ -1,15 +1,19 @@
-<thead>
-  <tr>User Id</tr>
-  <tr>Title</tr>
-  <tr>Genre</tr>
-  <tr>Option 1</tr>
-  <tr></tr>
-  <tr>Option 2</tr>
-  <tr></tr>
-  <tr>Edit</tr>
-  <tr>Delete</tr>
-  <tr>Show</tr>
-</thead>
+<table class="ui celled padded structured table">
+  <thead>
+    <tr>
+      <th rowspan="2">Date</th>
+      <th rowspan="2">ChooseIT Question</th>
+      <th rowspan="2">Genre</th>
+      <th colspan="5" class="center aligned">ChooseIT</th>
+    </tr>
+    <tr>
+      <th>Option 1</th>
+      <th>Option 2</th>
+      <th>Stats</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
 
 <tbody>
   <% @chooseits.each do |chooseit| %><br>
@@ -18,7 +22,9 @@
     <%= render partial: '/users/chooseits/table_row', locals: { chooseits: @chooseits, chooseit: chooseit, chooseit_choice_1: chooseit_choice_1, chooseit_choice_2: chooseit_choice_2 } %> <br>
   <% end %>
 </tbody>
-
-<div class="button"><br><br>
-    <%= link_to "Create a ChooseIT", new_user_chooseit_path %>
+</table>
+<div class="ui two column center aligned grid">
+<div class="column"><br><br>
+<a href=<%= new_chooseit_path %>><button class="ui huge giant blue button">Create a ChooseIT</button></a>
+</div>
 </div>
