@@ -13,7 +13,7 @@
 <body>
 
 
-</div>
+
   <%= render partial: "shared/header", locals: { user: @user } %>
 
   <% if flash[:notice] %>
@@ -27,14 +27,18 @@
 
  <%= yield %>
 
+<%= render partial: "shared/footer", locals: { user: @user } %>
 
 <script>
 $('.ui.dropdown')
   .dropdown()
 ;
 </script>
-
-<%= render partial: "shared/footer", locals: { user: @user } %>
+<script>
+$('.ui.checkbox')
+  .checkbox()
+;
+</script>
 
 </body>
 </html>

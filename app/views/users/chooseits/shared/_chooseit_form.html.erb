@@ -1,7 +1,6 @@
 
 
     <%= form_for [@user, @chooseit] do |f| %>
-
       <% if @chooseit.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@chooseit.errors.count, "error") %> prohibited this chooseit from being saved:</h2>
@@ -44,8 +43,8 @@
 
       <div class="ui center aligned two column grid">
         <div class="column">
-        <%= f.submit 'Submit' %>
-      </div>
+          <%= f.submit 'Submit' %>
+        </div>
       </div>
     <% end %>
  <div class="ui segment" id="background">

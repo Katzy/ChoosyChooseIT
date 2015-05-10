@@ -9,9 +9,9 @@
   <div class="ui dropdown item">
       My ChooseITS <i class="dropdown icon"></i>
       <div class="menu">
-
+          <li class="item"><b><%= link_to "All My ChooseITS", user_chooseits_path(current_or_guest_user) %></b></li>
           <% @chooseits.each do |chooseit| %>
-            <li class="item"><%= link_to "#{chooseit.title}", chooseit_path(chooseit) %></li>>
+            <li class="item"><%= link_to "#{chooseit.title}", chooseit_path(chooseit) %></li>
           <% end %>
 
       </div>

@@ -1,19 +1,24 @@
 
-<div class="form-group">
 
-<div class="ui center aligned sixteen column row">
+
   <%= content_tag(:label) do %>
-<div class="floated center aligned three wide column">
-    <% unless current_user.voted_for?(@chooseit) %>
+
+    <% unless current_or_guest_user.voted_for?(@chooseit) %>
+
+<div class="column">
+
+    <div class="ui checkbox">
+      <input type="checkbox">
 
       <%= radio_button_tag 'chooseit_choice[id]', option.id %>
+      </div>
     <%= option.description %>
+
+
     <% end %>
-  </div>
-  <div class="floated center aligned three wide column">
-
 
 </div>
+
+
+
   <% end %>
-</div>
-</div>

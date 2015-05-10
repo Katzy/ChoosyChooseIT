@@ -3,15 +3,22 @@
 
 <%= form_tag chooseit_responses_path, method: :post, id: 'chooseit_response_form' do %>
   <%= hidden_field_tag 'chooseit[id]', @chooseit.id %>
-  <div class="ui center aligned two column grid">
-        <div class="column">
+
 
   <%= render partial: 'chooseits/chooseit_choice', collection: @chooseit.chooseit_choices, as: :option %>
 
-<% unless current_user.voted_for?(@chooseit) %>
+  <div class="ui center aligned grid">
+  <div class="sixteen wide column">
+  <p><b>Total votes: <%= @chooseit.votes_totals %></b></p>
+    </div>
+    <div class="sixteen wide column">
+<% unless current_or_guest_user.voted_for?(@chooseit) %>
    <%= submit_tag 'ChooseIT', class: 'button' %>
 
     <% end %>
+    </div>
+    </div>
 <% end %>
-</div>
- </div>
+
+
+

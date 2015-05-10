@@ -12,8 +12,6 @@ class ChooseitsController < ApplicationController
     @chooseits_temp.each do |chooseit|
       @chooseits << chooseit = Chooseit.friendly.find(chooseit.id)
     end
-
-
   end
 
   def new
@@ -60,14 +58,10 @@ class ChooseitsController < ApplicationController
   end
 
   def show
-    if current_user == nil
-      @user = guest_user
-    else
-      @user = current_user
-    end
-    @chooseits = @user.chooseits
+
+    @chooseits = current_or_guest_user.chooseits
     @chooseit = Chooseit.includes(:chooseit_choices).find(params[:id])
-    @user = User.find(@chooseit.user_id)
+
     @chooseit_choice_1 = @chooseit.chooseit_choices[0]
     @chooseit_choice_2 = @chooseit.chooseit_choices[1]
 

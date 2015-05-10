@@ -21,6 +21,14 @@ class Chooseit < ActiveRecord::Base
   #   self.short_name
   # end
 
+  def normalized_votes_for(option)
+    votes_totals == 0 ? 0 : (option.chooseit_responses.count.to_f / votes_totals) * 100
+  end
+
+  def votes_totals
+    self.chooseit_choices.inject(0) {|total, option| total + option.chooseit_responses.count }
+  end
+
   private
 
   def set_chooseit_link

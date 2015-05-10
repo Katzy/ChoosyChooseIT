@@ -11,7 +11,7 @@ module ApplicationHelper
     if current_user
       if cookies.signed[:guest_token]
         logging_in
-        cookies.delete[:guest_token]
+        session[:guest_token] = nil
       end
       current_user
     else
@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def guest_user
-    @cached_guest_user ||= User.find_by!(guest_id: (cookies.permanent.signed[:guest_token] ||= create_guest_user.guest_id))
+    @cached_guest_user ||= User.find_by!(guest_id: (cookies.signed[:guest_token] ||= create_guest_user.guest_id))
 
   rescue ActiveRecord::RecordNotFound
     cookies.delete :guest_token

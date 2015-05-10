@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-fileupload
+//= require jquery.remotipart
 //= require semantic_ui/semantic_ui
 //= require_tree .

@@ -1,6 +1,6 @@
 class WelcomeController<ApplicationController
 
-  before_action :current_user
+
 
   def index
     if user_signed_in?

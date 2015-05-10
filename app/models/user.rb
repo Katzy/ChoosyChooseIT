@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   # end
 
   def voted_for?(chooseit)
-    chooseit_choices.any? { |choice| choice.chooseit == chooseit }
+     chooseit_choices.any? { |choice| choice.chooseit == chooseit }
   end
 
   def self.from_omniauth(auth)

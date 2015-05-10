@@ -1,11 +1,19 @@
 class ChooseitResponsesController < ApplicationController
 
+  include ApplicationHelper
+
   def create
-    if current_user && params[:chooseit] && params[:chooseit][:id] && params[:chooseit_choice]
+    if current_user == nil
+      @user = guest_user
+    else
+      @user = current_user
+    end
+
+    if @user && params[:chooseit] && params[:chooseit][:id] && params[:chooseit_choice]
       @chooseit = Chooseit.find(params[:chooseit][:id])
       @option = @chooseit.chooseit_choices.find_by_id(params[:chooseit_choice][:id])
-      if @option && @chooseit && !current_user.voted_for?(@chooseit)
-        @option.chooseit_responses.create({ user_id: current_user.id })
+      if @option && @chooseit && !@user.voted_for?(@chooseit)
+        @option.chooseit_responses.create({ user_id: @user.id })
         redirect_to chooseit_path(@chooseit)
       else
 
