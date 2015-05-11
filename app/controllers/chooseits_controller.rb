@@ -39,7 +39,7 @@ class ChooseitsController < ApplicationController
     respond_to do |format|
       if @chooseit.save
 
-        UserMailer.new_chooseit(current_or_guest_user).deliver
+        UserMailer.new_chooseit(current_or_guest_user, @chooseit).deliver
         format.html { redirect_to chooseit_path(@chooseit), notice: 'ChooseIT was successfully created.' }
         format.json { render action: 'show', status: :created, location: @chooseit }
         # added:
