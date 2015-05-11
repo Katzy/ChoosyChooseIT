@@ -4,6 +4,7 @@
   <% unless current_or_guest_user.voted_for?(@chooseit) && current_or_guest_user.id != @chooseit.user_id %>
 
     <div class="ui toggle large checkbox">
+      <input type="checkbox">
         <%= radio_button_tag 'chooseit_choice[id]', option.id %>
     </div>
 

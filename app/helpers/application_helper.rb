@@ -37,7 +37,7 @@ module ApplicationHelper
 
   def create_guest_user
     cookies.permanent.signed[:guest_token] = SecureRandom.uuid
-    u = User.create(:guest_id => cookies.permanent.signed[:guest_token], :email => "guest_#{Time.now.to_i}#{rand{100)}@example.com}")
+    u = User.create(:guest_id => cookies.permanent.signed[:guest_token], :email => "guest_#{Time.now.to_i}#{rand(100)}@example.com")
     # u.skip_confirmation!
     u.save!(:validate => false)
     u

@@ -35,9 +35,13 @@ $('.ui.dropdown')
 ;
 </script>
 <script>
-$('.ui.checkbox')
-  .checkbox()
-;
+$(document).ready(
+        function () {
+            $('.ui.checkbox')
+                    .checkbox()
+                    ;
+        });
+
 </script>
 <%= render partial: "shared/footer", locals: { user: @user } %>
 </body>
