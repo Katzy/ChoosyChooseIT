@@ -27,7 +27,7 @@
 
  <%= yield %>
 
-<%= render partial: "shared/footer", locals: { user: @user } %>
+
 
 <script>
 $('.ui.dropdown')
@@ -39,6 +39,6 @@ $('.ui.checkbox')
   .checkbox()
 ;
 </script>
-
+<%= render partial: "shared/footer", locals: { user: @user } %>
 </body>
 </html>

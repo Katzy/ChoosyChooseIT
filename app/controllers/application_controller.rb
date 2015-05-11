@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery :except => :receive_guest
 
-#   before_action :initialize_chooseits
+  include ApplicationHelper
+
+  before_action :current_or_guest_user
 
 #   def initialize_chooseits
 #     if current_user != nil

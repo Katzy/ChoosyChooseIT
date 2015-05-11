@@ -9,6 +9,7 @@ class WelcomeController<ApplicationController
       else
         @user = guest_user
       end
+      p @user.email
       @chooseits = @user.chooseits
     end
   end

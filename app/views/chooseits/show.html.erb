@@ -55,7 +55,7 @@
 
     <div class="ui form">
       <%= render 'chooseit_responses/chooseit_response_form' %>
-      </div>
+    </div>
 
   <% end %>
 
@@ -63,7 +63,7 @@
 
 <% if current_or_guest_user.voted_for?(@chooseit) && current_or_guest_user.id != @chooseit.user_id %>
 <div class="ui segment" id="background">
-  <div class="ui centered padded grid">
+  <div class="ui centered grid">
     <div class="row"></div>
     <div class="row"></div>
     <div class="row"></div>
@@ -71,12 +71,15 @@
       <div class="ui center aligned header"><br>
 
 
-          <a href=<%= new_chooseit_path %>><button class="ui huge giant blue button">Create a ChooseIT</button></a><div class="ui center aligned blue header"><br><br><br><br><br><br>
-          <h2>You've just given someone the gift of your solicited opinion!</h2>
-          <h2>How about soliciting some of your own? Go ahead...</h2></div><br><br><br><br>
-
+          <a href=<%= new_chooseit_path %>><button class="ui huge giant blue button">Create a ChooseIT</button></a>
       </div>
     </div>
   </div>
-</div>
+  </div>
+          <div class="ui center aligned blue header">
+          <h2>You've just given someone the gift of your solicited opinion!</h2>
+          <h2>How about soliciting some of your own?  Go ahead...</h2></div><br><br><br><br>
+
+
 <% end %>
+<br><br><br><br><br><br>

@@ -27,7 +27,7 @@
     </div> -->
 
     <div class="item">
-      <% if current_user %>
+      <% if current_or_guest_user == current_user %>
          Welcome <%= current_user.email %>
          <% if current_user.image %>
           <div class="item">
