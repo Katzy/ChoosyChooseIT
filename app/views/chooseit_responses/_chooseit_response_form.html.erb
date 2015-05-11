@@ -1,21 +1,25 @@
-<div class="ui form">
+
+
 
 
 <%= form_tag chooseit_responses_path, method: :post, id: 'chooseit_response_form' do %>
   <%= hidden_field_tag 'chooseit[id]', @chooseit.id %>
 
-
-
+<div class="ui centered grid">
+  <div class="two column row">
       <%= render partial: 'chooseits/chooseit_choice', collection: @chooseit.chooseit_choices, as: :option %>
-
+</div>
       <% if current_or_guest_user.voted_for?(@chooseit) && current_or_guest_user.id != @chooseit.user_id %>
         <p> You have already voted fo this one!</p>
       <% else %>
-
+      <div class="sixteen wide center aligned column">
          <%= submit_tag 'ChooseIT', class: 'button' %>
+         </div>
       <% end %>
 
+      </div>
 <% end %>
 
-</div>
+
+
 

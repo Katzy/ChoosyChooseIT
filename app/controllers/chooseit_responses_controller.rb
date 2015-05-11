@@ -15,18 +15,26 @@ class ChooseitResponsesController < ApplicationController
       @option = @chooseit.chooseit_choices.find_by_id(params[:chooseit_choice][:id])
       if @option && @chooseit && !@user.voted_for?(@chooseit)
         @option.chooseit_responses.create({ user_id: @user.id })
-        redirect_to chooseit_path(@chooseit)
-      else
-
-
       end
 
-    else
-      # render js: 'alert(\'Your vote cannot be saved.\');'
+    respond_to do |format|
+      if @option.save
+
+        format.html { redirect_to chooseit_path(@chooseit) }
+
+        format.json { render action: 'show', status: :created, location: @chooseit }
+        # added:
+        format.js   { render action: 'show', status: :created, location: @chooseit }
+      else
+        @chooseit = Chooseit.find(params[:chooseit][:id])
+        format.html { render action: 'show' }
+      end
     end
-    @chooseit = Chooseit.find(params[:chooseit][:id])
-    @user = User.find(@chooseit.user_id)
-    @chooseits=@user.chooseits# redirect_to "/"
+    else
+      flash[:notice]="You have to pick one!"
+      @chooseit = Chooseit.find(params[:chooseit][:id])
+      redirect_to chooseit_path(@chooseit)
+    end
   end
 
   def show

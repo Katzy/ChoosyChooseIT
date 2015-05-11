@@ -33,17 +33,13 @@ class ChooseitsController < ApplicationController
   def create
 
 
-      @chooseit = Chooseit.new(chooseit_params)
-      if current_user
-        @chooseit.user_id = current_user.id
-      else
-        @chooseit.user_id =  guest_user.id
-      end
+    @chooseit = Chooseit.new(chooseit_params)
+    @chooseit.user_id = current_or_guest_user.id
 
     respond_to do |format|
       if @chooseit.save
 
-        # UserMailer.wrestler_added(user).deliver
+        UserMailer.new_chooseit(current_or_guest_user).deliver
         format.html { redirect_to chooseit_path(@chooseit), notice: 'ChooseIT was successfully created.' }
         format.json { render action: 'show', status: :created, location: @chooseit }
         # added:
