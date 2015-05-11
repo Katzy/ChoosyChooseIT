@@ -5,12 +5,12 @@
   <a class="item">
     <i class="mail icon"></i> Messages
   </a>
-  <% if user_signed_in? || (guest_user.chooseits.length >= 1 && guest_user.email == nil) %>
+  <% if current_or_guest_user == current_user || guest_user.chooseits.length >= 1  %>
   <div class="ui dropdown item">
       My ChooseITS <i class="dropdown icon"></i>
       <div class="menu">
           <li class="item"><b><%= link_to "All My ChooseITS", user_chooseits_path(current_or_guest_user) %></b></li>
-          <% @chooseits.each do |chooseit| %>
+          <% current_or_guest_user.chooseits.each do |chooseit| %>
             <li class="item"><%= link_to "#{chooseit.title}", chooseit_path(chooseit) %></li>
           <% end %>
 
@@ -54,9 +54,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-

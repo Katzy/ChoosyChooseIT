@@ -51,11 +51,17 @@
        <p><%= @chooseit_choice_2.description %></p>
     </div>
   </div>
+
+
+    <div class="ui center aligned grid">
+      <div class="sixteen wide column">
+        <p><b>Total votes: <%= @chooseit.votes_totals %></b></p>
+      </div>
+    </div>
+
   <% unless current_or_guest_user.voted_for?(@chooseit) %>
 
-    <div class="ui form">
       <%= render 'chooseit_responses/chooseit_response_form' %>
-    </div>
 
   <% end %>
 

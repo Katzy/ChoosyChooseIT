@@ -11,6 +11,7 @@ class Chooseit < ActiveRecord::Base
   accepts_nested_attributes_for :chooseit_choices, :reject_if => :all_blank, :allow_destroy => true
 
   validates :title, :presence => true
+  validates :chooseit_choices, :presence => true
 
   GENRES = ["People", "Places", "Things", "Furry Creatures", "Miscellaneous"]
 

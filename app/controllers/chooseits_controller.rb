@@ -49,7 +49,11 @@ class ChooseitsController < ApplicationController
         # added:
         format.js   { render action: 'show', status: :created, location: @chooseit }
       else
+        @chooseit_choice_1 = @chooseit.chooseit_choices.build
+        @chooseit_choice_2 = @chooseit.chooseit_choices.build
+
         format.html { render action: 'new' }
+
         format.json { render json: @chooseit.errors, status: :unprocessable_entity }
         # added:
         format.js   { render json: @chooseit.errors, status: :unprocessable_entity }

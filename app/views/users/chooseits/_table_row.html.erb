@@ -1,7 +1,7 @@
 
 <tr>
   <td><%= chooseit.created_at %></td>
-  <td><%= chooseit.title %>
+  <td><%= link_to "#{chooseit.title}", chooseit_path(chooseit) %></td>
   <td><%= chooseit.genres %></td>
   <td><%= image_tag chooseit_choice_1.image.thumb('150x150#').url if chooseit_choice_1.image_stored? %><br><%= chooseit_choice_1.description %></td>
 

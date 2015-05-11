@@ -6,6 +6,6 @@ class ChooseitChoice < ActiveRecord::Base
   has_many   :chooseit_responses, dependent: :destroy
   has_many   :users, through: :chooseit_responses
 
-  # validates  :description, presence: true, default: "", null: false
+  validates  :description, presence: true
 
 end

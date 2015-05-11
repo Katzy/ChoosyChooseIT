@@ -8,6 +8,7 @@ class ChooseitResponsesController < ApplicationController
     else
       @user = current_user
     end
+    @chooseits = @user.chooseits
 
     if @user && params[:chooseit] && params[:chooseit][:id] && params[:chooseit_choice]
       @chooseit = Chooseit.find(params[:chooseit][:id])

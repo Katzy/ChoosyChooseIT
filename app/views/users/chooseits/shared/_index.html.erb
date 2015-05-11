@@ -1,4 +1,4 @@
-<table class="ui celled padded structured table">
+<table class="ui celled structured table">
   <thead>
     <tr>
       <th rowspan="2">Date</th>
@@ -16,10 +16,10 @@
   </thead>
 
 <tbody>
-  <% @chooseits.each do |chooseit| %><br>
+  <% @chooseits.each do |chooseit| %>
     <% chooseit_choice_1 = chooseit.chooseit_choices[0] %>
     <% chooseit_choice_2 = chooseit.chooseit_choices[1] %>
-    <%= render partial: '/users/chooseits/table_row', locals: { chooseits: @chooseits, chooseit: chooseit, chooseit_choice_1: chooseit_choice_1, chooseit_choice_2: chooseit_choice_2 } %> <br>
+    <%= render partial: '/users/chooseits/table_row', locals: { chooseits: @chooseits, chooseit: chooseit, chooseit_choice_1: chooseit_choice_1, chooseit_choice_2: chooseit_choice_2 } %>
   <% end %>
 </tbody>
 </table>
