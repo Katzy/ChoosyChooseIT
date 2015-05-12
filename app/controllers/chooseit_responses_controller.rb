@@ -47,7 +47,7 @@ class ChooseitResponsesController < ApplicationController
   end
 
   def chooseit_params
-    params.require(:chooseit).permit(:title, :short_name, :author_id, :genres, :created_at, :updated_at, :user_id, chooseit_choices_attributes: [:id, :description, :chooseit_id, :image, :_destroy])
+    params.require(:chooseit).permit(:title, :short_name, :author_id, :genres, :created_at, :updated_at, :user_id, :emails, chooseit_choices_attributes: [:id, :description, :chooseit_id, :image, :_destroy])
   end
 end
 
