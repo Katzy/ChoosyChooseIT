@@ -1,4 +1,4 @@
-class ChangeRespondentIdToUserIdChooseitResponses < ActiveRecord::Migration
+class AddEmailsToChooseit< ActiveRecord::Migration
   def change
 
     add_column :chooseits, :emails, :string
