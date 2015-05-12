@@ -40,9 +40,10 @@ class ChooseitsController < ApplicationController
     respond_to do |format|
       if @chooseit.save
         @choices = @chooseit.chooseit_choices
+        @user = User.find(@chooseit.user_id)
         @chooseit_choice_1 = @choices[0]
         @chooseit_choice_2 = @choices[1]
-        UserMailer.new_chooseit(current_or_guest_user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
+        UserMailer.new_chooseit(@user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
         format.html { redirect_to chooseit_path(@chooseit), notice: 'ChooseIT was successfully created.' }
         format.json { render action: 'show', status: :created, location: @chooseit }
         # added:
