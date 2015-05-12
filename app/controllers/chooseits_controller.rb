@@ -74,16 +74,22 @@ class ChooseitsController < ApplicationController
   # GET /users/:id/edit
   def edit
     @chooseit = Chooseit.find(params[:id])
-    @user = User.find(@chooseit.user_id)
-    @chooseits = @user.chooseits
+
+
     # authorize! :update, @user
   end
 
   def update
     @chooseit = Chooseit.find(params[:id])
     @user = User.find(@chooseit.user_id)
+    @choices = @chooseit.chooseit_choices
+
+        @chooseit_choice_1 = @choices[0]
+        @chooseit_choice_2 = @choices[1]
     if @chooseit.update(chooseit_params)
-      redirect_to user_chooseits_path(@user)
+       UserMailer.new_chooseit(@user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
+
+      redirect_to chooseit_path(@chooseit)
     else
       render :edit
     end
