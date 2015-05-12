@@ -28,7 +28,7 @@
 
     <div class="item">
       <% if current_or_guest_user == current_user %>
-         Welcome <%= current_user.email %>
+         Welcome <%= current_user.name %>
          <% if current_user.image %>
           <div class="item">
             <img class="ui avatar mini image" src=<%= current_user.image %>>
