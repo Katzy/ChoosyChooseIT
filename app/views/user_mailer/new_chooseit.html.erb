@@ -8,13 +8,11 @@
 
       <p>
         <%= link_to "Click here to ChooseIT.", "https://choosychooseit.herokuapp.com/chooseits/#{@chooseit.slug}"  %>
-      </p><br>
+      </p>
 
       <p>
-          <%= @chooseit_choice_1.description %><br><br><br><br>
 
-          <%= @chooseit_choice_2.description %><br><br>
-          <ul>Click the link and check one or the other.  That's it!</b> </ul>
+      Click the link and check one or the other.  That's it!
 
       </p><br>
 
@@ -23,6 +21,8 @@
       </p><br>
 
       <p>
+      Your friend,<br><br>
+
         <%= @user.name %>
         </p>
 
