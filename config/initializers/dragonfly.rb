@@ -18,7 +18,7 @@ Dragonfly.app.configure do
               access_key_id: ENV['AWSACCESSKEYID'],
               secret_access_key: ENV['AWSSECRETKEY'],
               url_scheme: 'https',
-              url_host: 'choosychooseit.s3.amazonaws.com'
+              url_host: 'choosychooseit.s3-website-us-west-2.amazonaws.com'
   end
 
 end
