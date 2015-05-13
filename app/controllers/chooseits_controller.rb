@@ -32,10 +32,8 @@ class ChooseitsController < ApplicationController
 
   def create
 
-
     @chooseit = Chooseit.new(chooseit_params)
     @chooseit.user_id = current_or_guest_user.id
-
 
     respond_to do |format|
       if @chooseit.save
@@ -65,7 +63,6 @@ class ChooseitsController < ApplicationController
 
     @chooseits = current_or_guest_user.chooseits
     @chooseit = Chooseit.includes(:chooseit_choices).find(params[:id])
-
     @chooseit_choice_1 = @chooseit.chooseit_choices[0]
     @chooseit_choice_2 = @chooseit.chooseit_choices[1]
     @chooseit_response = ChooseitResponse.new
@@ -84,12 +81,10 @@ class ChooseitsController < ApplicationController
     @chooseit = Chooseit.find(params[:id])
     @user = User.find(@chooseit.user_id)
     @choices = @chooseit.chooseit_choices
-
-        @chooseit_choice_1 = @choices[0]
-        @chooseit_choice_2 = @choices[1]
+    @chooseit_choice_1 = @choices[0]
+    @chooseit_choice_2 = @choices[1]
     if @chooseit.update(chooseit_params)
        UserMailer.new_chooseit(@user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
-
       redirect_to chooseit_path(@chooseit)
     else
       render :edit
@@ -97,8 +92,6 @@ class ChooseitsController < ApplicationController
   end
 
   def destroy
-
-
     @chooseit = Chooseit.find(params[:id])
     @chooseit_choices = @chooseit.chooseit_choices
     user = @chooseit[:user_id]

@@ -20,8 +20,6 @@ class ChooseitResponsesController < ApplicationController
     respond_to do |format|
       if @option.save
         if current_or_guest_user.voted_for?(@chooseit) && current_or_guest_user.id != @chooseit.user_id
-
-
         end
      format.html {redirect_to opined_path }
         # format.html { redirect_to chooseit_path(@chooseit) }
@@ -42,6 +40,7 @@ class ChooseitResponsesController < ApplicationController
   end
 
   def opined
+
   end
 
   private
