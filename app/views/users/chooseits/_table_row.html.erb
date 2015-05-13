@@ -3,9 +3,16 @@
   <td><%= chooseit.created_at %></td>
   <td><%= link_to "#{chooseit.title}", chooseit_path(chooseit) %></td>
   <td><%= chooseit.genres %></td>
-  <td><%= image_tag chooseit_choice_1.image.thumb('150x150#').url if chooseit_choice_1.image_stored? %><br><%= chooseit_choice_1.description %></td>
+  <td>
+  <% if chooseit_choice_1.image %>
+    <%= link_to image_tag(chooseit_choice_1.image.thumb('150x150#').url, class: 'img-thumbnail'), chooseit_choice_1.image.remote_url, target: '_blank' %><br>
+    <% end %>
+    <%= chooseit_choice_1.description %></td>
 
-    <td><%= image_tag chooseit_choice_2.image.thumb('150x150#').url if chooseit_choice_2.image_stored? %><br><%= chooseit_choice_2.description %></td>
+    <td><% if chooseit_choice_2.image %>
+      <%= link_to image_tag(chooseit_choice_2.image.thumb('150x150#').url, class: 'img-thumbnail'), chooseit_choice_2.image.remote_url, target: '_blank' %><br>
+      <% end %>
+      <%= chooseit_choice_2.description %></td>
   <td></td>
   <td><%= link_to 'Edit', edit_chooseit_path(chooseit) %></td>
   <td><%= link_to 'Delete', chooseit, method: "delete", :data => {:confirm => 'Are you sure?'} %></td>

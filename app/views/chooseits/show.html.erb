@@ -23,11 +23,11 @@
     <% if @chooseit_choice_1.image != nil || @chooseit_choice_2.image != nil %>
   <div class="ui three column stackable grid">
       <div class="left floated right aligned six wide column">
-          <%= image_tag @chooseit_choice_1.image.thumb('150x150#').url if @chooseit_choice_1.image_stored? %>
+          <%= link_to image_tag(@chooseit_choice_1.image.thumb('150x150#').url, class: 'img-thumbnail'), @chooseit_choice_1.image.remote_url, target: '_blank' %>
       </div>
 
       <div class="right floated left aligned six wide column">
-         <%= image_tag @chooseit_choice_2.image.thumb('150x150#').url if @chooseit_choice_2.image_stored? %>
+         <%= link_to image_tag(@chooseit_choice_2.image.thumb('150x150#').url, class: 'img-thumbnail'), @chooseit_choice_2.image.remote_url, target: '_blank' %>
       </div>
 
   </div>

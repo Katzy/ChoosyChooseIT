@@ -14,10 +14,11 @@ Dragonfly.app.configure do
               server_root: Rails.root.join('public')
   else
     datastore :s3,
-              bucket_name: 'choosychooseit',
+              bucket_name: ENV['S3_BUCKET'],
               access_key_id: ENV['AWSACCESSKEYID'],
               secret_access_key: ENV['AWSSECRETKEY'],
-              url_scheme: 'https'
+              url_scheme: 'https',
+              url_host: 'choosychooseit.s3.amazonaws.com'
   end
 
   datastore :file,
