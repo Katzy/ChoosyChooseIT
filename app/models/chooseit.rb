@@ -30,6 +30,14 @@ class Chooseit < ActiveRecord::Base
     self.chooseit_choices.inject(0) {|total, option| total + option.chooseit_responses.count }
   end
 
+  def response_hash
+    responses = {}
+    self.chooseit_choices.each do |choice|
+      responses[choice.description] = choice.chooseit_responses.count
+    end
+    responses
+  end
+
   private
 
   def set_chooseit_link

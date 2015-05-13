@@ -31,7 +31,7 @@ gem 'capybara', '~> 2.4'
 gem 'less-rails-semantic_ui'
 gem 'autoprefixer-rails'
 gem 'therubyracer'
-
+gem 'chartkick', '~> 1.3.2'
 gem 'omniauth'
 gem 'omniauth-facebook'
 # Use ActiveModel has_secure_password

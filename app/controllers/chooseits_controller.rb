@@ -69,6 +69,7 @@ class ChooseitsController < ApplicationController
     @chooseit_choice_1 = @chooseit.chooseit_choices[0]
     @chooseit_choice_2 = @chooseit.chooseit_choices[1]
     @chooseit_response = ChooseitResponse.new
+
   end
 
   # GET /users/:id/edit

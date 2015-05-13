@@ -52,9 +52,10 @@
     </div>
   </div>
 
-
-    <div class="ui center aligned grid">
+    <%= pie_chart(@chooseit.response_hash) %><br>
+      <div class="ui center aligned grid">
       <div class="sixteen wide column">
+
         <p><b>Total votes: <%= @chooseit.votes_totals %></b></p>
       </div>
     </div>
