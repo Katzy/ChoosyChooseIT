@@ -19,8 +19,12 @@ class ChooseitResponsesController < ApplicationController
 
     respond_to do |format|
       if @option.save
+        if current_or_guest_user.voted_for?(@chooseit) && current_or_guest_user.id != @chooseit.user_id
 
-        format.html { redirect_to chooseit_path(@chooseit) }
+
+        end
+     format.html {redirect_to opined_path }
+        # format.html { redirect_to chooseit_path(@chooseit) }
 
         format.json { render action: 'show', status: :created, location: @chooseit }
         # added:
@@ -37,7 +41,7 @@ class ChooseitResponsesController < ApplicationController
     end
   end
 
-  def show
+  def opined
   end
 
   private
