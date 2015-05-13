@@ -23,11 +23,11 @@
     <% if @chooseit_choice_1.image != nil || @chooseit_choice_2.image != nil %>
   <div class="ui three column stackable grid">
       <div class="left floated right aligned six wide column">
-          <%= link_to image_tag(@chooseit_choice_1.image.thumb('150x150#').url, class: 'img-thumbnail'), @chooseit_choice_1.image.remote_url, target: '_blank' %>
+          <%= link_to image_tag(@chooseit_choice_1.image.thumb('250x250#').url, class: 'img-thumbnail'), @chooseit_choice_1.image.remote_url, target: '_blank' %>
       </div>
 
       <div class="right floated left aligned six wide column">
-         <%= link_to image_tag(@chooseit_choice_2.image.thumb('150x150#').url, class: 'img-thumbnail'), @chooseit_choice_2.image.remote_url, target: '_blank' %>
+         <%= link_to image_tag(@chooseit_choice_2.image.thumb('250x250#').url, class: 'img-thumbnail'), @chooseit_choice_2.image.remote_url, target: '_blank' %>
       </div>
 
   </div>
@@ -36,7 +36,7 @@
   <div class="ui three column grid">
 
     <div class="left floated right aligned six wide column">
-      <p><%= @chooseit_choice_1.description %></p>
+      <h1><%= @chooseit_choice_1.description %></h1>
     </div>
     <% if current_or_guest_user.id == @chooseit.user_id %>
 
@@ -51,8 +51,9 @@
        <p><%= @chooseit_choice_2.description %></p>
     </div>
   </div>
-
+    <% unless @chooseit.votes_totals < 2 %>
     <%= pie_chart(@chooseit.response_hash) %><br>
+    <% end %>
       <div class="ui center aligned grid">
       <div class="sixteen wide column">
 
