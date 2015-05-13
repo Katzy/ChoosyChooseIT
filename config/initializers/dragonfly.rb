@@ -21,9 +21,6 @@ Dragonfly.app.configure do
               url_host: 'choosychooseit.s3.amazonaws.com'
   end
 
-  datastore :file,
-    root_path: Rails.root.join('public/system/dragonfly', Rails.env),
-    server_root: Rails.root.join('public')
 end
 
 # Logger
