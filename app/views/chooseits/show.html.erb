@@ -51,8 +51,11 @@
        <h2><%= @chooseit_choice_2.description %></h2>
     </div>
   </div>
-    <% unless current_or_guest_user.voted_for?(@chooseit) && @chooseit.votes_totals < 2 %>
+
+    <% unless @chooseit.votes_totals < 2 %>
+    <% if current_or_guest_user.voted_for?(@chooseit) %>
     <%= pie_chart(@chooseit.response_hash) %><br>
+    <% end %>
     <% end %>
       <div class="ui center aligned grid">
       <div class="sixteen wide column">
