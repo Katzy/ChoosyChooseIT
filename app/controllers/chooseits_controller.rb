@@ -41,7 +41,7 @@ class ChooseitsController < ApplicationController
         @user = User.find(@chooseit.user_id)
         @chooseit_choice_1 = @choices[0]
         @chooseit_choice_2 = @choices[1]
-        unless @chooseit.emails[0] != nil
+        unless @chooseit.emails[0] == nil
           UserMailer.new_chooseit(@user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
         end
 
@@ -88,7 +88,7 @@ class ChooseitsController < ApplicationController
     @chooseit_choice_1 = @choices[0]
     @chooseit_choice_2 = @choices[1]
     if @chooseit.update(chooseit_params)
-      unless @chooseit.emails[0] != nil
+      unless @chooseit.emails[0] == nil
        UserMailer.new_chooseit(@user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
       end
       redirect_to chooseit_path(@chooseit)
