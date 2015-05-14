@@ -4,41 +4,61 @@
 
 <%= form_tag chooseit_responses_path, method: :post, id: 'chooseit_response_form' do %>
   <%= hidden_field_tag 'chooseit[id]', @chooseit.id %>
+<div class="choices">
+<div class="ui stackable two column grid">
 
-<div class="ui  grid">
-
-
-<div class="ui floated left center aligned sixteen wide column" id="radio">
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-       <% @chooseit.chooseit_choices.each do |option| %>
 
 
   <% unless current_or_guest_user.voted_for?(@chooseit) && current_or_guest_user.id != @chooseit.user_id %>
 
+        <div class="ui left floated right aligned six wide column">
+        <div class="ui toggle checkbox">
+          <input type="checkbox">
+            <%= radio_button_tag 'chooseit_choice[id]', @chooseit.chooseit_choices[0].id %>
 
-        <%= radio_button_tag 'chooseit_choice[id]', option.id %>
+        </div>
+        </div>
 
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <div class="ui right floated left aligned six wide column">
+        <div class="ui toggle checkbox">
+          <input type="checkbox" %>
+            <%= radio_button_tag 'chooseit_choice[id]', @chooseit.chooseit_choices[1].id %>
+
+            </div>
+        </div>
 
     <% end %>
-  <% end %>
 
+
+</div>
 </div>
 
 
       <% if current_or_guest_user.voted_for?(@chooseit) && current_or_guest_user.id != @chooseit.user_id %>
         <p> You have already voted fo this one!</p>
       <% else %>
+      <div class="ui grid">
       <div class="sixteen wide center aligned column">
          <div class="actions">
          <%= submit_tag 'ChooseIT' %>
          </div>
          </div>
+         </div>
       <% end %>
 
       </div>
+
 <% end %>
 </div>
+<script type="text/javascript">
+$('input[type=radio').change(function(){
+
+    if (this.checked)
+    {
+      $(this).closest('.checkbox').find('input[type=radio]').not(this).prop('checked', false);
+    }
+})
+</script>
 
 
 

@@ -46,6 +46,15 @@ $(document).ready(
         });
 
 </script>
+<script>
+$('input[type=checkbox]').change(function(){
+
+    if (this.checked)
+    {
+      $(this).closest('.choices').find('input[type=checkbox]').not(this).prop('checked', false);
+    }
+})
+</script>
 <%= render partial: "shared/footer", locals: { user: @user } %>
 </body>
 </html>

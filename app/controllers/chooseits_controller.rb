@@ -41,7 +41,10 @@ class ChooseitsController < ApplicationController
         @user = User.find(@chooseit.user_id)
         @chooseit_choice_1 = @choices[0]
         @chooseit_choice_2 = @choices[1]
-        UserMailer.new_chooseit(@user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
+        unless @chooseit.emails[0] != nil
+          UserMailer.new_chooseit(@user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
+        end
+
         format.html { redirect_to chooseit_path(@chooseit), notice: 'ChooseIT was successfully created.' }
         format.json { render action: 'show', status: :created, location: @chooseit }
         # added:
@@ -65,6 +68,7 @@ class ChooseitsController < ApplicationController
     @chooseit = Chooseit.includes(:chooseit_choices).find(params[:id])
     @chooseit_choice_1 = @chooseit.chooseit_choices[0]
     @chooseit_choice_2 = @chooseit.chooseit_choices[1]
+
     @chooseit_response = ChooseitResponse.new
 
   end
@@ -84,7 +88,9 @@ class ChooseitsController < ApplicationController
     @chooseit_choice_1 = @choices[0]
     @chooseit_choice_2 = @choices[1]
     if @chooseit.update(chooseit_params)
+      unless @chooseit.emails[0] != nil
        UserMailer.new_chooseit(@user, @chooseit, @chooseit_choice_1, @chooseit_choice_2).deliver
+      end
       redirect_to chooseit_path(@chooseit)
     else
       render :edit
