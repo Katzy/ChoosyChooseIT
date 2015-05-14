@@ -42,6 +42,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'friendly_id', '~> 5.1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'auto_html', '~> 1.6.4'
 
 group :production do
   gem 'rails_12factor'

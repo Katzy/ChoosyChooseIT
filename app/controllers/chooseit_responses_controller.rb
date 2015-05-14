@@ -14,7 +14,7 @@ class ChooseitResponsesController < ApplicationController
       @chooseit = Chooseit.find(params[:chooseit][:id])
       @option = @chooseit.chooseit_choices.find_by_id(params[:chooseit_choice][:id])
       if @option && @chooseit && !@user.voted_for?(@chooseit)
-        @option.chooseit_responses.create({ user_id: @user.id })
+        @option.chooseit_responses.create({ user_id: @user.id, chooseit_id: @chooseit.id })
       end
 
     respond_to do |format|
@@ -40,13 +40,14 @@ class ChooseitResponsesController < ApplicationController
   end
 
   def opined
-
+    response = ChooseitResponse.where("user_id = '#{current_or_guest_user.id}'").last
+    @chooseit = Chooseit.find(response.chooseit_id)
   end
 
   private
 
   def chooseit_response_params
-    params.require(:chooseit_response).permit(:created_at, :updated_at, :chooseit_choice_id, :user_id)
+    params.require(:chooseit_response).permit(:created_at, :updated_at, :chooseit_id, :chooseit_choice_id, :user_id)
   end
 
   def chooseit_params

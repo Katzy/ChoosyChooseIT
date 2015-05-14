@@ -3,6 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def new_chooseit(user, chooseit, chooseit_choice_1, chooseit_choice_2)
     @user = user
+    @user.name = "noreply" if @user.name == nil
     @chooseit = chooseit
     @emails = @chooseit.emails.split(',')
     @chooseit_choice_1 = chooseit_choice_1
