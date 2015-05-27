@@ -2,9 +2,7 @@
   <a href=<%= root_path %>><div class="item">
     <i class="big home icon link icon"></i> Home</div>
   </a>
-  <a class="item">
-    <i class="mail icon"></i> Messages
-  </a>
+
   <% if current_or_guest_user == current_user || guest_user.chooseits.length >= 1  %>
   <div class="ui dropdown item">
       My ChooseITS <i class="dropdown icon"></i>
