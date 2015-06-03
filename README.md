@@ -27,7 +27,7 @@ brew update
 
 brew install postgresql
 
-For more detailed installation guide, see here
+For more detailed installation guide, <a href="http://www.moncefbelyamani.com/how-to-install-postgresql-on-a-mac-with-homebrew-and-lunchy/" target="_blank">here</a>
 
 ## Faceboook login setup
 
