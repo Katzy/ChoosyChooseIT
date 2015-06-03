@@ -33,7 +33,18 @@ For more detailed installation guide, see here
 
 This app uses facebook login for user authentication.
 The .env file include the FACEBOOK_APP_ID and FACEBOOK_APP_SECRET for a fb_login app development version, it should work out of box. If for some reason it stopped working, you can follow instructions here to set up a new facebook login app.
-Amazon AWS S3
+
+## Dragonfly
+
+This app uses dragonfly for photo processing.
+gem install dragonfly
+
+## Dragonfly-s3_data_store
+
+This app uses dragonfly-s3-data-store as adaptor for dragonfly + Amazon S3
+gem install dragonfly-s3_data_store
+
+## Amazon AWS S3
 
 This app uses Amazon S3 for photo storage. You'd need to set up a seperate amazon S3 account. AWS allows free account and usage.
 
@@ -50,17 +61,10 @@ Your S3 Bucket AWS ASSET HOST URL (this can be found by going bucket -> Properti
 
 Enter the those information to the appropiate matching lines in your .env file
 
-## Dragonfly
-
-This app uses dragonfly for photo processing.
-gem install dragonfly
-
 ## Friendly-id
 
 This app uses Friendly-id for slugs in the place of poll id #'s as the link.  It creates a user friendly, more visually asthetic link to click.  It also allows for search of a poll using it's primary key without having to worry about creating your own `to_param` method.
 
-This app uses carrierwave-aws as adaptor for carrierwave + Amazon S3
-gem install dragonfly-s3_data_store
 
 ## Sendgrid for email
 
